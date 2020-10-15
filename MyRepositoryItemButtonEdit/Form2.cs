@@ -160,7 +160,7 @@ namespace MyRepositoryItemButtonEdit
         {
             List<Reader> readers = new List<Reader>();
             string DeviceName = "Device";
-            string ReaderName = "Kapı ";
+            string ReaderName = "Door ";
             for (int i = 1; i <= 5; i++)
             {
                 if (i % 2 == 0)
