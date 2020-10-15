@@ -22,14 +22,14 @@ namespace MyRepositoryItemButtonEdit
             InitializeComponent();
 
             gridControl1.DataSource = GetReaders();
-            //gridView1.Columns[2].Visible = false;
-            //gridView1.Columns[4].Visible = false;
-            //gridView1.Columns[6].Visible = false;
-            //gridView1.Columns[8].Visible = false;
-            //gridView1.Columns[10].Visible = false;
-            //gridView1.Columns[12].Visible = false;
-            //gridView1.Columns[14].Visible = false;
-            //gridView1.Columns[16].Visible = false;
+            gridView1.Columns[2].Visible = false;
+            gridView1.Columns[4].Visible = false;
+            gridView1.Columns[6].Visible = false;
+            gridView1.Columns[8].Visible = false;
+            gridView1.Columns[10].Visible = false;
+            gridView1.Columns[12].Visible = false;
+            gridView1.Columns[14].Visible = false;
+            gridView1.Columns[16].Visible = false;
             ri = new MyRepositoryItemButtonEdit();
             ri.Buttons[0].Kind = ButtonPredefines.Glyph;
             ri.TextEditStyle = TextEditStyles.HideTextEditor;
@@ -42,7 +42,9 @@ namespace MyRepositoryItemButtonEdit
             gridView1.Columns["ReaderName6"].ColumnEdit = ri;
             gridView1.Columns["ReaderName7"].ColumnEdit = ri;
             gridView1.Columns["ReaderName8"].ColumnEdit = ri;
-
+            gridView1.OptionsView.ShowIndicator = false;
+            //gridView1.OptionsBehavior.Editable = false;
+            gridView1.BestFitColumns();
             ri.ButtonClick += new ButtonPressedEventHandler(repositoryItemButtonEdit1_ButtonClick);
         }
 
@@ -50,9 +52,7 @@ namespace MyRepositoryItemButtonEdit
         {
             #region Color Code
 
-            Debug.WriteLine(
-                   e.Column.FieldName + ": " + e.CellValue.ToString()
-                );
+            Debug.WriteLine(e.Column.FieldName + ": " + e.CellValue.ToString());
 
             foreach (var item in GetColumnNames())
             {
@@ -71,7 +71,7 @@ namespace MyRepositoryItemButtonEdit
 
         private void repositoryItemButtonEdit1_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
-            MessageBox.Show(e.Button.Caption);
+            MessageBox.Show(e.Button.Caption + " / " + gridView1.GetFocusedRowCellValue("DeviceName").ToString());
         }
 
         private void gridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -106,7 +106,7 @@ namespace MyRepositoryItemButtonEdit
             {
                 ButtonEdit ed = (ButtonEdit)view.ActiveEditor;
                 ed.Properties.Buttons[0].Caption = view.GetFocusedDisplayText();
-                ed.Properties.Appearance.BackColor = Color.Yellow;
+                //ed.Properties.Appearance.BackColor = Color.Yellow;
             }
         }
 
